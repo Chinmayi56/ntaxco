@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import AnimatedServiceSearch from "@/components/shared/AnimatedServiceSearch";
 import {
   ArrowRight, FileText, BadgeIndianRupee, BookOpen, Wallet, ScrollText, Building2,
   ShieldCheck, TrendingUp, CalendarPlus, CheckCircle2, Star, Quote, Mail, MapPin,
@@ -189,10 +190,34 @@ export default function CustomerLanding() {
         <section className="bg-[#F8FAFC] border-b border-slate-200">
           <div className="max-w-7xl mx-auto px-6 py-4 flex flex-wrap items-center justify-between gap-3">
             <div><p className="text-xs uppercase tracking-[0.18em] font-semibold text-royal">Customer Workspace</p><p className="text-sm text-slate-600 mt-0.5">Welcome back, {user.name?.split(" ")[0] || "Customer"}.</p></div>
-            <div className="flex flex-wrap gap-2">
-              <Button onClick={startBooking} className="bg-brand text-[#0A2540] hover:bg-brand-hover font-semibold"><CalendarPlus className="h-4 w-4 mr-1.5" />Book a Service</Button>
-              <Button variant="outline" className="border-slate-300" onClick={() => navigate("/customer/documents")}><FileText className="h-4 w-4 mr-1.5" />Upload Docs</Button>
-            </div>
+            
+<div className="flex flex-wrap items-center justify-end gap-2">
+  {/* 1. Search icon */}
+  <AnimatedServiceSearch
+    onSelectService={() => navigate("/customer/services")}
+    onSearch={() => navigate("/customer/services")}
+  />
+
+  {/* 2. Book a Service */}
+  <Button
+    onClick={startBooking}
+    className="bg-brand text-[#0A2540] hover:bg-brand-hover font-semibold"
+  >
+    <CalendarPlus className="h-4 w-4 mr-1.5" />
+    Book a Service
+  </Button>
+
+  {/* 3. Upload Docs */}
+  <Button
+    variant="outline"
+    className="border-slate-300"
+    onClick={() => navigate("/customer/documents")}
+  >
+    <FileText className="h-4 w-4 mr-1.5" />
+    Upload Docs
+  </Button>
+</div>
+
           </div>
         </section>
       )}
